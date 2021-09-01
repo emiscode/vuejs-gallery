@@ -3,21 +3,22 @@
     <h1 class="page-title">{{ title }}</h1>
     <ul class="list-photos">
       <li class="list-photos__item" v-for="photo of photos" :key="photo.id">
-        <div class="panel">
-          <div class="panel-photo">
-            <img class="photo" :src="photo.thumbnailUrl">
-          </div>
-          <div class="panel-title">
-            <p class="list-photos__item-title">{{ photo.title }}</p>
-          </div>
-        </div>
+        <emiscode-panel :title="photo.title">
+          <img class="photo" :src="photo.thumbnailUrl">
+        </emiscode-panel>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import Panel from './components/shared/panel/Panel.vue'
+
 export default {
+  components: {
+    'emiscode-panel': Panel
+  },
+
   data() {
     return {
       title: "Gallery",
@@ -60,29 +61,9 @@ export default {
     
   }
 
-  .panel {
-    margin: 5px;
-    width: 190px;
-    height: 100%;
-    min-height: 300px;
-    text-align: center;
-    vertical-align: top;
-    display: inline-block;
-    background: #f1f1f1;
-    border: solid 1px #000;
-  }
-
   .list-photos__item-title {
     font-size: 12px;
     text-transform: uppercase;
-  }
-
-  .panel-title {
-    padding: 0px 10px 0px 10px;
-  }
-
-  .panel-photo {
-    width: 100%;
   }
 
   .photo {
