@@ -1,8 +1,10 @@
 <template>
   <div class="container">
     <h1 class="page-title">{{ title }}</h1>
+    <input type="search" class="search" placeholder="search" v-on:input="doSearch($event)">
+    {{ search }}
     <ul class="list-photos">
-      <li class="list-photos__item" v-for="photo of photos" :key="photo.id">
+      <li class="list-photos__item" v-for="photo of filteredPhotos" :key="photo.id">
         <emiscode-panel :title="photo.title">
           <img class="photo" :src="photo.thumbnailUrl">
         </emiscode-panel>
@@ -19,10 +21,29 @@ export default {
     'emiscode-panel': Panel
   },
 
+  methods: {
+    doSearch(event) {
+      this.search = event.target.value
+    }
+  },
+
+  computed: {
+    filteredPhotos() {
+      if (this.search) {
+        //return this.photos.filter(photo => photo.title.includes(this.search.trim()))
+        const exp = new RegExp(this.search.trim(), 'i')
+        return this.photos.filter(photo => exp.test(photo.title))
+      } else {
+        return this.photos
+      }
+    }
+  },
+
   data() {
     return {
       title: "Gallery",
       photos: [],
+      search: ''
     };
   },
   created() {
@@ -33,7 +54,7 @@ export default {
     .then(data => this.photos = data.slice(0, 24), err => {
       console.log(err)
     })
-  }
+  },
 };
 </script>
 
@@ -68,5 +89,12 @@ export default {
 
   .photo {
     width: 100%;
+  }
+
+  .search {
+    width: 30%;
+    padding: 10px;
+    margin: 0 auto;
+    display: block;
   }
 </style>
