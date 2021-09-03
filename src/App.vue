@@ -1,8 +1,7 @@
 <template>
   <div class="container">
     <h1 class="page-title">{{ title }}</h1>
-    <input type="search" class="search" placeholder="search" v-on:input="doSearch($event)">
-    {{ search }}
+    <input type="search" class="search" placeholder="search" @input="doSearch($event)">
     <ul class="list-photos">
       <li class="list-photos__item" v-for="photo of filteredPhotos" :key="photo.id">
         <emiscode-panel :title="photo.title">

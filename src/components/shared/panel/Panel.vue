@@ -1,7 +1,9 @@
 <template>
   <div class="panel">
-    <slot class="panel-content"></slot>
-    <div class="panel-title">{{ title }}</div>
+    <div class="panel-content" @dblclick="setTitleVisibility">
+      <slot></slot>
+    </div>
+    <div class="panel-title" v-show="visibility">{{ title }}</div>
   </div>
 </template>
 
@@ -9,7 +11,19 @@
 export default {
     props: [
         'title'
-    ]
+    ],
+
+    methods: {
+      setTitleVisibility() {
+        this.visibility = !this.visibility
+      }
+    },
+
+    data() {
+      return {
+        visibility: true
+      }
+    }
 }
 </script>
 
