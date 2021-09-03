@@ -3,7 +3,9 @@
     <div class="panel-content" @dblclick="setTitleVisibility">
       <slot></slot>
     </div>
-    <div class="panel-title" v-show="visibility">{{ title }}</div>
+    <transition name="panel-fade">
+      <div class="panel-title" v-show="visibility">{{ title }}</div>
+    </transition>
   </div>
 </template>
 
@@ -46,5 +48,13 @@ export default {
 
 .panel-content {
   width: 100%;
+}
+
+.panel-fade-enter, .panel-fade-leave-active {
+  opacity: 0;
+}
+
+.panel-fade-enter-active, .panel-fade-leave-active {
+  transition: opacity .5s;
 }
 </style>
