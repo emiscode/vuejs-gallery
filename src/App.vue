@@ -5,7 +5,7 @@
     <ul class="list-photos">
       <li class="list-photos__item" v-for="photo of filteredPhotos" :key="photo.id">
         <emiscode-panel :title="photo.title">
-          <img class="photo" :src="photo.thumbnailUrl">
+          <emiscode-img-responsive :src="photo.thumbnailUrl" :alt="photo.title"/>
         </emiscode-panel>
       </li>
     </ul>
@@ -14,10 +14,12 @@
 
 <script>
 import Panel from './components/shared/panel/Panel.vue'
+import ImgResponsive from './components/shared/img-responsive/ImgResponsive.vue'
 
 export default {
   components: {
-    'emiscode-panel': Panel
+    'emiscode-panel': Panel,
+    'emiscode-img-responsive': ImgResponsive
   },
 
   methods: {
@@ -84,10 +86,6 @@ export default {
   .list-photos__item-title {
     font-size: 12px;
     text-transform: uppercase;
-  }
-
-  .photo {
-    width: 100%;
   }
 
   .search {
