@@ -1,17 +1,27 @@
 <template>
   <div class="container">
-    <nav>
-      <ul>
-        <li class="btn-list"><router-link class="btn-nav" to="/">Home</router-link></li>
-        <li class="btn-list"><router-link  class="btn-nav" to="/create">Create</router-link></li>
-      </ul>
-    </nav>
-    <router-view></router-view>
+    <emiscode-menu :routes="routes"/>
+    <transition name="page">
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
 <script>
-export default {};
+import { routes } from "./routes";
+import Menu from "./components/shared/navigation/Menu.vue"
+
+export default {
+  components: {
+    'emiscode-menu': Menu
+  },
+
+  data() {
+    return {
+      routes,
+    };
+  },
+};
 </script>
 
 <style>
@@ -25,18 +35,13 @@ body {
   font-family: sans-serif;
 }
 
-.btn-list {
-  display: inline;
+.page-enter,
+.page-leave-active {
+  opacity: 0;
 }
 
-.btn-nav {
-  color: #333;
-  width: 100px;
-  padding: 5px;
-  border-radius: 5px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  background: yellowgreen;
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.5s;
 }
 </style>
