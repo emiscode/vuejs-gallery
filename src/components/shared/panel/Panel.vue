@@ -11,22 +11,20 @@
 
 <script>
 export default {
-    props: [
-        'title'
-    ],
+  props: ["title"],
 
-    methods: {
-      setTitleVisibility() {
-        this.visibility = !this.visibility
-      }
+  methods: {
+    setTitleVisibility() {
+      this.visibility = !this.visibility;
     },
+  },
 
-    data() {
-      return {
-        visibility: true
-      }
-    }
-}
+  data() {
+    return {
+      visibility: true,
+    };
+  },
+};
 </script>
 
 <style scoped>
@@ -50,11 +48,13 @@ export default {
   width: 100%;
 }
 
-.panel-fade-enter, .panel-fade-leave-active {
+.panel-fade-enter,
+.panel-fade-leave-active {
   opacity: 0;
 }
 
-.panel-fade-enter-active, .panel-fade-leave-active {
-  transition: opacity .5s;
+.panel-fade-enter-active,
+.panel-fade-leave-active {
+  transition: opacity 0.5s;
 }
 </style>

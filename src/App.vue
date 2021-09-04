@@ -1,97 +1,42 @@
 <template>
   <div class="container">
-    <h1 class="page-title">{{ title }}</h1>
-    <input type="search" class="search" placeholder="search" @input="doSearch($event)">
-    <ul class="list-photos">
-      <li class="list-photos__item" v-for="photo of filteredPhotos" :key="photo.id">
-        <emiscode-panel :title="photo.title">
-          <emiscode-img-responsive :src="photo.thumbnailUrl" :alt="photo.title"/>
-        </emiscode-panel>
-      </li>
-    </ul>
+    <nav>
+      <ul>
+        <li class="btn-list"><router-link class="btn-nav" to="/">Home</router-link></li>
+        <li class="btn-list"><router-link  class="btn-nav" to="/create">Create</router-link></li>
+      </ul>
+    </nav>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Panel from './components/shared/panel/Panel.vue'
-import ImgResponsive from './components/shared/img-responsive/ImgResponsive.vue'
-
-export default {
-  components: {
-    'emiscode-panel': Panel,
-    'emiscode-img-responsive': ImgResponsive
-  },
-
-  methods: {
-    doSearch(event) {
-      this.search = event.target.value
-    }
-  },
-
-  computed: {
-    filteredPhotos() {
-      if (this.search) {
-        //return this.photos.filter(photo => photo.title.includes(this.search.trim()))
-        const exp = new RegExp(this.search.trim(), 'i')
-        return this.photos.filter(photo => exp.test(photo.title))
-      } else {
-        return this.photos
-      }
-    }
-  },
-
-  data() {
-    return {
-      title: "Gallery",
-      photos: [],
-      search: ''
-    };
-  },
-  created() {
-    const api = 'https://jsonplaceholder.typicode.com/albums/1/photos'
-
-    this.$http.get(api)
-    .then(res => res.json())
-    .then(data => this.photos = data.slice(0, 24), err => {
-      console.log(err)
-    })
-  },
-};
+export default {};
 </script>
 
 <style>
-  body {
-    background: #333;
-  }
-  .container {
-    width: 89%;
-    margin: 0 auto;
-    font-family: sans-serif;
-  }
+body {
+  background: #333;
+}
 
-  .page-title {
-    color: #fff;
-    text-align: center;
-  }
+.container {
+  width: 89%;
+  margin: 0 auto;
+  font-family: sans-serif;
+}
 
-  .list-photos {
-    list-style: none;
-  }
+.btn-list {
+  display: inline;
+}
 
-  .list-photos__item {
-    display: inline-block;
-    
-  }
-
-  .list-photos__item-title {
-    font-size: 12px;
-    text-transform: uppercase;
-  }
-
-  .search {
-    width: 30%;
-    padding: 10px;
-    margin: 0 auto;
-    display: block;
-  }
+.btn-nav {
+  color: #333;
+  width: 100px;
+  padding: 5px;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  background: yellowgreen;
+}
 </style>
