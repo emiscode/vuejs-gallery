@@ -4,7 +4,10 @@
       <slot></slot>
     </div>
     <transition name="panel-fade">
-      <div class="panel-title" v-show="visibility">{{ title }}</div>
+      <div class="panel-title" v-show="visibility">
+        <div class="panel-title__label">{{ title }}</div>
+        <slot name="buttons"></slot>
+      </div>
     </transition>
   </div>
 </template>
@@ -42,6 +45,10 @@ export default {
 
 .panel-title {
   padding: 0px 10px 0px 10px;
+}
+
+.panel-title__label {
+  min-height: 120px;
 }
 
 .panel-content {

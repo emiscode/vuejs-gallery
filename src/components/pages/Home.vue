@@ -18,6 +18,7 @@
             :src="photo.thumbnailUrl"
             :alt="photo.title"
           />
+          <emiscode-btn-action type="button" label="Delete" slot="buttons"/>
         </emiscode-panel>
       </li>
     </ul>
@@ -27,11 +28,13 @@
 <script>
 import Panel from "../shared/panel/Panel.vue";
 import ImgResponsive from "../shared/img-responsive/ImgResponsive.vue";
+import ButtonAction from "../shared/navigation/ButtonAction.vue";
 
 export default {
   components: {
     "emiscode-panel": Panel,
     "emiscode-img-responsive": ImgResponsive,
+    "emiscode-btn-action": ButtonAction,
   },
 
   methods: {
