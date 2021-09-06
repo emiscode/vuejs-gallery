@@ -18,7 +18,13 @@
             :src="photo.thumbnailUrl"
             :alt="photo.title"
           />
-          <emiscode-btn-action type="button" label="Delete" slot="buttons"/>
+          <emiscode-btn-action
+            type="button"
+            label="Delete"
+            slot="buttons"
+            :confirm="true"
+            @btnClicked="remove(photo)"
+          />
         </emiscode-panel>
       </li>
     </ul>
@@ -40,6 +46,10 @@ export default {
   methods: {
     doSearch(event) {
       this.search = event.target.value;
+    },
+
+    remove(photo) {
+      console.log(photo.id);
     },
   },
 

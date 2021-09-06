@@ -1,10 +1,23 @@
 <template>
-  <button class="btn btn-danger" :type="type">{{ label }}</button>
+  <button @click="emitAction()" class="btn btn-danger" :type="type">
+    {{ label }}
+  </button>
 </template>
 
 <script>
 export default {
-  props: ["type", "label"],
+  props: ["type", "label", "confirm"],
+
+  methods: {
+    emitAction() {
+      if (this.confirm && confirm('Confirm operation?')) {
+        this.$emit("btnClicked");
+        return;
+      }
+
+      this.$emit("btnClicked");      
+    },
+  },
 };
 </script>
 
