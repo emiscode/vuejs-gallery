@@ -23,6 +23,7 @@
             label="Delete"
             slot="buttons"
             :confirm="true"
+            styleType="danger"
             @btnClicked="remove(photo)"
           />
         </emiscode-panel>
@@ -49,7 +50,11 @@ export default {
     },
 
     remove(photo) {
-      console.log(photo.id);
+      const index = this.photos.findIndex(el => {
+        return el.id == photo.id
+      })
+      
+      this.photos.splice(index, 1)
     },
   },
 

@@ -1,23 +1,49 @@
 <template>
-  <button @click="emitAction()" class="btn btn-danger" :type="type">
+  <button @click="emitAction()" class="btn" :class="btnStyle" :type="type">
     {{ label }}
   </button>
 </template>
 
 <script>
 export default {
-  props: ["type", "label", "confirm"],
+  
+  props: {
+    type: {
+      required: true,
+      type: String
+    },
+
+    label: {
+      required: true,
+      type: String
+    },
+    confirm: {
+      required: false,
+      type: Boolean
+    },
+    styleType: {
+      required: false,
+      type: String
+    }
+  },
 
   methods: {
     emitAction() {
       if (this.confirm && confirm('Confirm operation?')) {
         this.$emit("btnClicked");
-        return;
       }
 
-      this.$emit("btnClicked");      
+      return    
     },
   },
+
+  computed: {
+    btnStyle() {
+      if (this.styleType) return `btn-${this.styleType}`
+      
+      return 'btn-default'
+    }
+  }
 };
 </script>
 
