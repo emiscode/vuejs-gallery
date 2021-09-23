@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="page-title">{{ title }}</h1>
+    <h1 v-emiscode-rotate class="page-title">{{ title }}</h1>
     <input
       type="search"
       class="search"
@@ -13,7 +13,7 @@
         v-for="photo of filteredPhotos"
         :key="photo.id"
       >
-        <emiscode-panel :title="photo.title">
+        <emiscode-panel v-emiscode-rotate="{ rotation: 180, animation: true }" :title="photo.title">
           <emiscode-img-responsive
             :src="photo.thumbnailUrl"
             :alt="photo.title"
