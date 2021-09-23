@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 v-emiscode-rotate class="page-title">{{ title }}</h1>
+    <h1 v-emiscode-rotate.reverse class="page-title">{{ title }}</h1>
     <input
       type="search"
       class="search"

@@ -12,7 +12,11 @@ Vue.directive('emiscode-rotate', {
                 el.style.transition = 'transform 0.5s'
             }
         } else {
-            rotation += 180
+            rotation += 30
+        }
+
+        if (binding.modifiers.reverse) {
+            rotation = -rotation
         }
     
         el.style.transform = `rotate(${rotation}deg)`
