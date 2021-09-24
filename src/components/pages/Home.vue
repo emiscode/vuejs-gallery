@@ -1,11 +1,12 @@
 <template>
   <div>
-    <h1 v-emiscode-rotate.reverse class="page-title">{{ title }}</h1>
+    <h1 v-emiscode-transform.reverse class="page-title">{{ title }}</h1>
     <input
       type="search"
       class="search"
       placeholder="search"
       @input="doSearch($event)"
+      v-emiscode-transform:scale="{ dimension: 1, animation: true }"
     />
     <ul class="list-photos">
       <li
@@ -13,7 +14,7 @@
         v-for="photo of filteredPhotos"
         :key="photo.id"
       >
-        <emiscode-panel v-emiscode-rotate="{ rotation: 180, animation: true }" :title="photo.title">
+        <emiscode-panel v-emiscode-transform:rotate="{ dimension: 180, animation: true }" :title="photo.title">
           <emiscode-img-responsive
             :src="photo.thumbnailUrl"
             :alt="photo.title"
