@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1 v-emiscode-transform.reverse class="page-title">{{ title }}</h1>
+    <p v-emiscode-colorize="'cyan'" class="page-subTitle">{{ subTitle }}</p>
     <input
       type="search"
       class="search"
@@ -37,12 +38,17 @@
 import Panel from "../shared/panel/Panel.vue";
 import ImgResponsive from "../shared/img-responsive/ImgResponsive.vue";
 import ButtonAction from "../shared/navigation/ButtonAction.vue";
+import Colorize from "../../directives/Colorize"
 
 export default {
   components: {
     "emiscode-panel": Panel,
     "emiscode-img-responsive": ImgResponsive,
     "emiscode-btn-action": ButtonAction,
+  },
+
+  directives: {
+    'emiscode-colorize': Colorize
   },
 
   methods: {
@@ -74,6 +80,7 @@ export default {
   data() {
     return {
       title: "Gallery",
+      subTitle: "Amazing 150x150 photos",
       photos: [],
       search: "",
     };
@@ -96,6 +103,11 @@ export default {
 
 <style>
 .page-title {
+  color: #fff;
+  text-align: center;
+}
+
+.page-subTitle {
   color: #fff;
   text-align: center;
 }
