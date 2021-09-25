@@ -7,10 +7,11 @@
         <input
           id="thumbnailUrl"
           autocomplete="off"
-          @input="setPhoto('thumbnailUrl', $event)"
-          :value="photo.thumbnailUrl"
+          v-model.lazy="photo.thumbnailUrl"
         />
-        <emiscode-img-responsive />
+        <div class="container-preview-img">
+          <emiscode-img-responsive v-show="photo.thumbnailUrl" :url="photo.thumbnailUrl"/>
+        </div>
       </div>
 
       <div class="form-container">
@@ -29,13 +30,17 @@
           <emiscode-btn-action type="button" label="Back" styleType="default" />
         </router-link>
       </div>
+      <div class="container-message">
+        <p class="message">{{ message }}</p>
+      </div>
     </form>
   </div>
 </template>
 
 <script>
-import ButtonAction from "../shared/navigation/ButtonAction.vue";
-import ImgResponsive from "../shared/img-responsive/ImgResponsive.vue";
+import ButtonAction from "../shared/navigation/ButtonAction.vue"
+import ImgResponsive from "../shared/img-responsive/ImgResponsive.vue"
+import Photo from "../../models/Photo"
 
 export default {
   components: {
@@ -45,31 +50,25 @@ export default {
 
   data() {
     return {
-      photo: {
-        title: "",
-        thumbnailUrl: "",
-      },
-    };
+      photo: new Photo(),
+      message: ''
+    }
   },
 
   methods: {
     setPhoto(prop, event) {
-      this.photo[prop] = event.target.value;
+      this.photo[prop] = event.target.value
     },
 
     savePhoto() {
-      const { title, thumbnailUrl } = this.photo;
-      const photo = { title, thumbnailUrl };
+      const { title, thumbnailUrl } = this.photo
+      const photo = { title, thumbnailUrl }
 
-      console.log(photo);
-
-      this.photo = {
-        title: "",
-        thumbnailUrl: "",
-      };
+      this.message = `Saved: ${JSON.stringify(photo)}`
+      this.photo = new Photo()
     },
   },
-};
+}
 </script>
 
 <style scoped>
@@ -99,6 +98,22 @@ export default {
   font-size: inherit;
   border-radius: 5px;
   padding: 5px;
+}
+
+.container-preview-img {
+  width: 150px;
+  display: block;
+  margin-top: 5px;
+}
+
+.container-message {
+  background: cyan;
+}
+
+.message {
+  padding: 5px;
+  color: #333;
+  font-weight: bold;
 }
 </style>
 
