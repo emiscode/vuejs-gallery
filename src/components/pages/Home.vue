@@ -86,17 +86,13 @@ export default {
     };
   },
   created() {
-    const api = "https://jsonplaceholder.typicode.com/albums/1/photos";
+    this.resource = this.$resource('albums/1/photos')
 
-    this.$http
-      .get(api)
+    this.resource
+      .query()
       .then((res) => res.json())
-      .then(
-        (data) => (this.photos = data.slice(0, 24)),
-        (err) => {
-          console.log(err);
-        }
-      );
+      .then((data) => this.photos = data.slice(0, 24), (err) => console.log(err)
+      )
   },
 };
 </script>
