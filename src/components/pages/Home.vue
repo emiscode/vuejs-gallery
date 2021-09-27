@@ -9,6 +9,9 @@
       @input="doSearch($event)"
       v-emiscode-transform:scale="{ dimension: 1, animation: true }"
     />
+    <div class="container-message">
+        <p class="message" v-show="message">{{ message }}</p>
+      </div>
     <ul class="list-photos">
       <li
         class="list-photos__item"
@@ -39,6 +42,7 @@ import Panel from "../shared/panel/Panel.vue";
 import ImgResponsive from "../shared/img-responsive/ImgResponsive.vue";
 import ButtonAction from "../shared/navigation/ButtonAction.vue";
 import Colorize from "../../directives/Colorize"
+import PhotoService from "../../services/PhotoService"
 
 export default {
   components: {
@@ -57,11 +61,19 @@ export default {
     },
 
     remove(photo) {
-      const index = this.photos.findIndex(el => {
-        return el.id == photo.id
-      })
+      this.message = ''
+      this.service.delete(photo.id)
+      .then(() => {
+        const index = this.photos.findIndex(el => {
+          return el.id == photo.id
+        })
       
-      this.photos.splice(index, 1)
+        this.photos.splice(index, 1)
+      })
+      .catch(err => {
+        console.log(err)
+        this.message = `Error while removing photo: ${JSON.stringify(err)}`
+      })
     },
   },
 
@@ -83,16 +95,15 @@ export default {
       subTitle: "Amazing 150x150 photos",
       photos: [],
       search: "",
+      message: ''
     };
   },
   created() {
-    this.resource = this.$resource('albums/1/photos')
+    this.service = new PhotoService(this.$resource)
 
-    this.resource
-      .query()
-      .then((res) => res.json())
-      .then((data) => this.photos = data.slice(0, 24), (err) => console.log(err)
-      )
+    this.service
+      .listAll()
+      .then((data) => this.photos = data.slice(0, 24), (err) => console.log(err))
   },
 };
 </script>
@@ -138,5 +149,15 @@ export default {
   margin-bottom: 13px;
   text-decoration: none;
   background: yellowgreen;
+}
+
+.container-message {
+  background: cyan;
+}
+
+.message {
+  padding: 5px;
+  color: #333;
+  font-weight: bold;
 }
 </style>

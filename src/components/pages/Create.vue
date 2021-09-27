@@ -31,7 +31,7 @@
         </router-link>
       </div>
       <div class="container-message">
-        <p class="message">{{ message }}</p>
+        <p class="message" v-show="message">{{ message }}</p>
       </div>
     </form>
   </div>
@@ -41,6 +41,7 @@
 import ButtonAction from "../shared/navigation/ButtonAction.vue"
 import ImgResponsive from "../shared/img-responsive/ImgResponsive.vue"
 import Photo from "../../models/Photo"
+import PhotoService from "../../services/PhotoService"
 
 export default {
   components: {
@@ -55,6 +56,10 @@ export default {
     }
   },
 
+  created() {
+    this.service = new PhotoService(this.$resource)
+  },
+
   methods: {
     setPhoto(prop, event) {
       this.photo[prop] = event.target.value
@@ -64,8 +69,16 @@ export default {
       const { title, thumbnailUrl } = this.photo
       const photo = { title, thumbnailUrl }
 
-      this.message = `Saved: ${JSON.stringify(photo)}`
-      this.photo = new Photo()
+      this.service
+        .save(photo)
+        .then(() => {
+          this.message = `Saved: ${JSON.stringify(photo)}`
+          this.photo = new Photo()
+        })
+        .catch(err => {
+          console.log(err)
+          this.message = `Error while saving photo: ${JSON.stringify(err)}`
+        })
     },
   },
 }
