@@ -7,6 +7,16 @@ export default class PhotoService {
         return this._resource
             .query()
             .then(res => res.json())
+            .catch(err => {
+                console.log(err)
+                throw new Error(`Failed to load photos: ${JSON.stringify(err)}`)
+            })
+    }
+
+    findById(id) {
+        return this._resource
+            .get({ id } )
+            .then(res => res.json())
     }
 
     save(photo) {

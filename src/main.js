@@ -8,7 +8,7 @@ import './directives/Transform'
 Vue.use(VueRouter)
 Vue.use(VueResource)
 
-Vue.http.options.root = 'https://jsonplaceholder.typicode.com'
+Vue.http.options.root = 'https://jsonplaceholder.typicode.co'
 
 new Vue({
   el: '#app',

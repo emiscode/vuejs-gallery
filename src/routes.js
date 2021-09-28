@@ -20,6 +20,14 @@ export const routes = [
     },
     {
         id: 3,
+        path: '/modify/:id',
+        name: 'modify',
+        component: Create,
+        title: 'Modify',
+        menu: false
+    },
+    {
+        id: 4,
         path: '*',
         component: Home,
         menu: false

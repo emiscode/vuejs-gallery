@@ -31,6 +31,13 @@
             styleType="danger"
             @btnClicked="remove(photo)"
           />
+          <router-link :to="{ name: 'modify', params: { id: photo.id } }" slot="buttons">
+          <emiscode-btn-action
+            type="button"
+            label="Modify"
+            styleType="default-blue"
+          />
+          </router-link>
         </emiscode-panel>
       </li>
     </ul>
@@ -103,7 +110,10 @@ export default {
 
     this.service
       .listAll()
-      .then((data) => this.photos = data.slice(0, 24), (err) => console.log(err))
+      .then((data) => this.photos = data.slice(0, 24))
+      .catch((err) => { 
+        this.message = err.message
+      })
   },
 };
 </script>

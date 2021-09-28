@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="title-create">Create</h1>
+    <h1 class="title-create">Form</h1>
     <form @submit.prevent="savePhoto()">
       <div class="form-container">
         <label for="url">URL</label>
@@ -52,12 +52,26 @@ export default {
   data() {
     return {
       photo: new Photo(),
+      id: this.$route.params.id,
       message: ''
     }
   },
 
   created() {
     this.service = new PhotoService(this.$resource)
+
+    if (this.id) {
+      console.log(`Getting photo by Id ${this.id}`)
+
+      this.service.findById(this.id)
+        .then(photo => {
+          this.photo = photo[0]
+        })
+        .catch(err => {
+          console.log(err)
+          this.message = `Error while chaging photo: ${this.id}`
+        })
+    }
   },
 
   methods: {

@@ -67,4 +67,8 @@ export default {
 .btn-default {
   background: yellowgreen;
 }
+
+.btn-default-blue {
+  background: skyblue;
+}
 </style>
