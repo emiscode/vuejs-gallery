@@ -26,7 +26,7 @@
 
       <div class="container-center">
         <emiscode-btn-action type="submit" label="Save" styleType="default" />
-        <router-link to="/">
+        <router-link :to="{ name: 'home' }">
           <emiscode-btn-action type="button" label="Back" styleType="default" />
         </router-link>
       </div>
