@@ -6,7 +6,8 @@ import VueResource from 'vue-resource'
 import VeeValidate from 'vee-validate'
 
 import './directives/Transform'
-//import 'bootstrap/dist/css/bootstrap.css'
+// import 'bootstrap/dist/css/bootstrap.css'
+// import './assets/css/style.css'
 
 Vue.use(VueRouter)
 Vue.use(VueResource)
