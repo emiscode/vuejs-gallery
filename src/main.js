@@ -3,8 +3,10 @@ import App from './App.vue'
 import { routes } from './routes'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
-import './directives/Transform'
 import VeeValidate from 'vee-validate'
+
+import './directives/Transform'
+//import 'bootstrap/dist/css/bootstrap.css'
 
 Vue.use(VueRouter)
 Vue.use(VueResource)
