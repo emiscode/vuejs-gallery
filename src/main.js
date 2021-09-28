@@ -4,11 +4,13 @@ import { routes } from './routes'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 import './directives/Transform'
+import VeeValidate from 'vee-validate'
 
 Vue.use(VueRouter)
 Vue.use(VueResource)
+Vue.use(VeeValidate)
 
-Vue.http.options.root = 'https://jsonplaceholder.typicode.co'
+Vue.http.options.root = 'https://jsonplaceholder.typicode.com'
 
 new Vue({
   el: '#app',
